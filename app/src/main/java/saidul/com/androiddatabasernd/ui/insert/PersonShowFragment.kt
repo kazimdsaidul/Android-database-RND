@@ -1,4 +1,4 @@
-package saidul.com.androiddatabasernd.ui
+package saidul.com.androiddatabasernd.ui.insert
 
 import android.content.Context
 import android.os.Bundle
@@ -9,15 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_persion_list.view.*
 import saidul.com.androiddatabasernd.R
+import saidul.com.androiddatabasernd.ui.MyPersionRecyclerViewAdapter
 import saidul.com.androiddatabasernd.ui.dummy.DummyContent.DummyItem
 
 
 /**
  * A fragment representing a list of Items.
  * Activities containing this fragment MUST implement the
- * [PersionFragment.OnListFragmentInteractionListener] interface.
+ * [PersonShowFragment.OnListFragmentInteractionListener] interface.
  */
-class PersionFragment : Fragment() {
+class PersonShowFragment : Fragment() {
 
 
     private var listener: OnListFragmentInteractionListener? = null
@@ -46,6 +47,11 @@ class PersionFragment : Fragment() {
         view.list.layoutManager = linearLayoutManager
 
         view.list.adapter = adapter
+
+        view.floatingActionButton2.setOnClickListener({
+
+
+        })
 
 
 

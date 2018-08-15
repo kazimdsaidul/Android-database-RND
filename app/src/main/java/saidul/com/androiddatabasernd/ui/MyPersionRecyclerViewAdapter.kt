@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_persion.view.*
 import saidul.com.androiddatabasernd.R
-import saidul.com.androiddatabasernd.ui.PersionFragment.OnListFragmentInteractionListener
 import saidul.com.androiddatabasernd.ui.dummy.DummyContent.DummyItem
+import saidul.com.androiddatabasernd.ui.insert.PersonShowFragment.OnListFragmentInteractionListener
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
