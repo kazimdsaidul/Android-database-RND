@@ -8,16 +8,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_persion.view.*
 import saidul.com.androiddatabasernd.R
+import saidul.com.androiddatabasernd.model.Person
 import saidul.com.androiddatabasernd.ui.dummy.DummyContent.DummyItem
-import saidul.com.androiddatabasernd.ui.insert.PersonShowFragment.OnListFragmentInteractionListener
+import saidul.com.androiddatabasernd.ui.show.PersonShowFragment.OnListFragmentInteractionListener
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
+
 class MyPersionRecyclerViewAdapter(
-        private val mValues: ArrayList<DummyItem>,
+        private val mValues: MutableList<Person>,
         private val mListener: OnListFragmentInteractionListener?)
     : RecyclerView.Adapter<MyPersionRecyclerViewAdapter.ViewHolder>() {
 
@@ -40,8 +37,9 @@ class MyPersionRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.content
+
+        holder.mIdView.text = item.id.toString();
+        holder.mContentView.text = item.name;
 
         with(holder.mView) {
             tag = item

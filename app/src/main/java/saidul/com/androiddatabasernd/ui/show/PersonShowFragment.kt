@@ -1,5 +1,7 @@
-package saidul.com.androiddatabasernd.ui.insert
+package saidul.com.androiddatabasernd.ui.show
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,10 +9,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_persion_list.view.*
+import android.widget.Toast
+import kotlinx.android.synthetic.main.fragment_persion_list.*
 import saidul.com.androiddatabasernd.R
+import saidul.com.androiddatabasernd.model.Person
 import saidul.com.androiddatabasernd.ui.MyPersionRecyclerViewAdapter
 import saidul.com.androiddatabasernd.ui.dummy.DummyContent.DummyItem
+import saidul.com.androiddatabasernd.ui.insert.viewModel.PersonViewModel
 
 
 /**
@@ -22,10 +27,11 @@ class PersonShowFragment : Fragment() {
 
 
     private var listener: OnListFragmentInteractionListener? = null
-    var mValues: ArrayList<DummyItem> = arrayListOf();
+
+    var mValues: MutableList<Person> = mutableListOf()
     lateinit var adapter: MyPersionRecyclerViewAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
-
+    private lateinit var mPersonViewModel: PersonViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,21 +45,6 @@ class PersonShowFragment : Fragment() {
 
         // Set the adapter
 
-        adapter = MyPersionRecyclerViewAdapter(mValues, listener)
-
-
-
-        linearLayoutManager = LinearLayoutManager(activity)
-        view.list.layoutManager = linearLayoutManager
-
-        view.list.adapter = adapter
-
-        view.floatingActionButton2.setOnClickListener({
-
-
-        })
-
-
 
         return view
     }
@@ -64,7 +55,6 @@ class PersonShowFragment : Fragment() {
 
 
         load();
-        adapter.notifyDataSetChanged();
 
 
     }
@@ -72,10 +62,27 @@ class PersonShowFragment : Fragment() {
 
     private fun load() {
 
-        for (i in 0..2) {
-            mValues.add(DummyItem("3434", "sdfsd", "sdfsdf"))
-        }
 
+        mPersonViewModel = ViewModelProviders.of(this).get(PersonViewModel::class.java)
+        mPersonViewModel.mAllPerson.observe(this, object : Observer<List<Person>> {
+            override fun onChanged(t: List<Person>?) {
+                mValues = t as ArrayList<Person>;
+
+                adapter = MyPersionRecyclerViewAdapter(mValues, listener)
+
+
+
+                linearLayoutManager = LinearLayoutManager(activity)
+                list.layoutManager = linearLayoutManager
+
+                list.adapter = adapter
+
+                Toast.makeText(context, "notifyDataSetChanged", Toast.LENGTH_LONG).show()
+
+            }
+
+
+        })
 
     }
 
